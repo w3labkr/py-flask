@@ -1,0 +1,9 @@
+<div id="openweathermap"
+     class='weather clearfix'>
+    <small class="weather__name">{{ settings.openweathermap.name }}</small> |
+    <small class="weather__description">{{ settings.openweathermap.weather.description }}</small> |
+    <small class="weather__temp">{{ settings.openweathermap.main.temp }}&#8451</small>
+    <img class="weather__icon"
+         src="http://openweathermap.org/img/wn/{{ settings.openweathermap.weather.icon }}.png"
+         alt="{{ settings.openweathermap.weather.description }}">
+</div>

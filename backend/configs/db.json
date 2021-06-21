@@ -1,0 +1,30 @@
+{
+  "base": {
+    "host": "localhost",
+    "user": "dbuser",
+    "password": "dbpass",
+    "database": "dbname",
+    "port": 3306
+  },
+  "pool": {
+    "host": "localhost",
+    "user": "dbuser",
+    "password": "dbpass",
+    "database": "dbname",
+    "port": 3306,
+    "waitForConnections": true,
+    "connectionLimit": 10,
+    "queueLimit": 0
+  },
+  "promisePool": {
+    "Promise": "bluebird",
+    "host": "localhost",
+    "user": "dbuser",
+    "password": "dbpass",
+    "database": "dbname",
+    "port": 3306,
+    "waitForConnections": true,
+    "connectionLimit": 10,
+    "queueLimit": 0
+  }
+}

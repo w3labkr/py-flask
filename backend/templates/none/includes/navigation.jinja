@@ -1,0 +1,14 @@
+{% set current = '' %}
+{% set slug = '/' %}
+{% set isActive = 'active' if current == settings.metadata.current else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">Home</a>
+
+{% set current = 'analysis' %}
+{% set slug = '/analysis/seoul/park/' %}
+{% set isActive = 'active' if current == settings.metadata.current else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">Analysis</a>
+
+{% set current = 'ai' %}
+{% set slug = '/ai/binary-classification/titanic/' %}
+{% set isActive = 'active' if current == settings.metadata.current else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">AI</a>

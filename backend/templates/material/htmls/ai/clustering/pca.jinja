@@ -1,0 +1,111 @@
+{% extends '{}/layouts/{}.jinja'.format(settings.theme, settings.layout) %}
+
+
+{# Head #}
+{% block title %}PCA - Clustering | AI{% endblock %}
+
+
+
+{# body #}
+{% block secondary %}
+<h2 class="page-title">PCA</h2>
+<p class="page-description">Upload the data files you want machine learning.</p>
+
+<form action="/ai/clustering/pca/" method="post" enctype="multipart/form-data" onsubmit="return onSubmit()">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+  <div>
+    <Label class="input-custom-file mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+      ADD FILE
+      <input type="file" id="file" name="file" accept=".csv, .tsv" style="display:none;">
+    </label>
+    <br>
+    <small>Accept: csv, tsv</small>
+  </div>
+
+  <br>
+
+  <div>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="kmeans__n_clusters" name="kmeans__n_clusters" value="{{ form.get('kmeans__n_clusters', '3') }}" data-older="{{ form.get('kmeans__n_clusters', '3') }}">
+      <label class="mdl-textfield__label" for="kmeans__n_clusters">n_clusters</label>
+      <span class="mdl-textfield__error">Input is not a number!</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="form-buttons">
+    <button type="reset" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Cancel</button>
+    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Submit</button>
+  </div>
+
+  <br>
+
+  <div class="form-messages">
+    <div id="validate-message" data-modified="수정된 내역이 없습니다." data-uploaded="파일이 첨부되지 않았습니다." style="display:none;"></div>
+    {% if data.iserror %}
+    <div class="error-message">{{ data.errmsg }}</div>
+    {% endif %}
+  </div>
+
+</form>
+{% endblock %}
+
+
+
+{% block primary %}
+<header class="page-header">
+  <h2 class="page-title">PCA - Clustering</h2>
+</header>
+
+<div class="page-content">
+
+  <div class="section">
+    <h3>session</h3>
+    session: 
+    {% for name, value in session.items() %}
+      <br> {{ name, value }} 
+    {% endfor %}
+
+    <h3>Request</h3>
+    form: {{ form }}
+
+    <h3>Response</h3>
+    data: {{ data }}
+
+    <h3>Trained</h3>
+    {% set username = session.get('username', '') %}
+    {% set uuid = session.get('uuid', '') %}
+    {% set filename = data.get('dataset', {}).get('origin', {}).get('image', '') %}
+    
+    {% if (username == 'anonymous') and (filename != '') %}
+    <img src="{{ url_for('users.anonymous', username=username, uuid=uuid, filename=filename) }}" alt="">
+    {% elif (username != 'anonymous') and (filename != '') %}
+    <img src="{{ url_for('users.username', username=username, filename=filename) }}" alt="">
+    {% else %}
+    <img src="" alt="">
+    {% endif %}
+
+  </div>
+
+  <div class="section">
+    <h3>Dataset</h3>
+    <table id="datatable" class="display" width="100%">
+      <caption>source: sklearn</caption>
+    </table>
+  </div>
+
+</div>
+
+<footer class="page-footer"></footer>
+{% endblock %}
+
+
+
+{# foot #}
+{% block script %}
+<script>
+
+</script>
+{% endblock %}

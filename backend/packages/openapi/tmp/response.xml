@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<response>
+  <header>
+    <resultCode>00</resultCode>
+    <resultMsg>NORMAL SERVICE.</resultMsg>
+  </header>
+  <body>
+    <items>
+      <item>
+        <accDefRate>1.2510362122</accDefRate>
+        <accExamCnt>3277947</accExamCnt>
+        <accExamCompCnt>3205183</accExamCompCnt>
+        <careCnt>8897</careCnt>
+        <clearCnt>30637</clearCnt>
+        <createDt>2020-12-10 09:27:13.236</createDt>
+        <deathCnt>564</deathCnt>
+        <decideCnt>40098</decideCnt>
+        <examCnt>72764</examCnt>
+        <resutlNegCnt>3165085</resutlNegCnt>
+        <seq>349</seq>
+        <stateDt>20201210</stateDt>
+        <stateTime>00:00</stateTime>
+        <updateDt>null</updateDt>
+      </item>
+    </items>
+    <numOfRows>10</numOfRows>
+    <pageNo>1</pageNo>
+    <totalCount>1</totalCount>
+  </body>
+</response>

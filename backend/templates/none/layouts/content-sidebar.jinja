@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ko" prefix="og: http://ogp.me/ns#">
+
+<head>
+  {% block head %}
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible"
+        content="IE=edge" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1" />
+  <!-- X-UA-Compatible does not work in Explorer if http-equiv is not directly below it. -->
+  <!-- Do not change the meta tag above. -->
+
+  <!-- 
+    Safari HTML Reference
+    
+    By default, Safari on iOS detects any string formatted like a phone number and makes it a link that calls the number. Specifying telephone=no disables this feature.
+    https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html
+  -->
+  <meta name="format-detection"
+        content="telephone=no" />
+
+  <!-- Verification Tag -->
+  <meta name="google-site-verification"
+        content="" />
+
+  <!-- 
+    The Web Robots Pages
+    Web Robots (also known as Web Wanderers, Crawlers, or Spiders), are programs that traverse the Web automatically. Search engines such as Google use them to index the web content, spammers use them to scan for email addresses, and they have many other uses.
+    https://www.robotstxt.org/
+  -->
+  <meta name="robots"
+        content="{% block robots %}index,follow{% endblock %}" />
+
+  <!-- 
+    Cache-Control
+    The Cache-Control HTTP header holds directives (instructions) for caching in both requests and responses. A given directive in a request does not mean the same directive should be in the response.
+    https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+  -->
+
+  <!-- Search Engine Optimization -->
+  <title>{% block title %}Data Analysis{% endblock %}</title>
+  <meta name="description"
+        content="{% block description %}{% endblock %}" />
+  <meta name="keywords"
+        content="{% block keywords %}{% endblock %}" />
+
+  <!-- 
+    Favicon
+    
+    A favicon, also known as a shortcut icon, website icon, tab icon, URL icon, or bookmark icon, is a file containing one or more small icons, associated with a particular website or web page.
+    Generate favicon.ico
+    https://www.favicon-generator.org/
+  
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+    <meta name="theme-color" content="#ffffff" />
+  -->
+
+  <!-- Canonical URL -->
+  <link rel="canonical"
+        href="{% block canonical %}{% endblock %}" />
+
+  <!-- Facebook Open Graph -->
+  {% block facebook %}
+  <meta property="fb:app_id"
+        content="" />
+  <meta property="og:url"
+        content="" />
+  <meta property="og:type"
+        content="website" />
+  <meta property="og:title"
+        content="" />
+  <meta property="og:image"
+        content="" />
+  <meta property="og:description"
+        content="" />
+  <meta property="og:site_name"
+        content="" />
+  {% endblock %}
+
+
+  {% block stylesheets %}
+    {% include '{}/includes/stylesheets.jinja'.format(settings.theme) %}
+    {% block stylesheet %}{% endblock %}
+  {% endblock %}
+
+  {% endblock %}
+</head>
+
+<body>
+
+  <!--[if lte IE 9]>
+  <div class="browser-message">
+    <noscript>
+      <p class="browser-warning noscript-warning" role="alert" style="padding:10px;">
+        <strong>This web page requires JavaScript to be enabled.</strong><br/>
+        JavaScript is an object-oriented computer programming language
+        commonly used to create interactive effects within web browsers.
+      </p>
+    </noscript>
+    <p class="browser-warning upgrade-warning" role="alert" style="padding:10px;">
+      You are using an <strong>outdated</strong> browser. Please <a class="alert-link" href="http://browsehappy.com/" target="_blank">upgrade your browser</a> to improve your experience.
+    </p>
+  </div>
+  <![endif]-->
+
+  <!-- Always shows a header, even in smaller screens. -->
+  <div id="page" class="site demo-layout-waterfall mdl-layout mdl-js-layout">
+
+    <header id="masthead" class="site-header navbar mdl-layout__header mdl-layout__header--waterfall">
+
+      <!-- Top row, always visible -->
+      <div class="mdl-layout__header-row">    
+        <span id="page-brand" class="site-brand">
+          <span class="mdl-layout-title"></span>
+        </span>
+        <div class="mdl-layout-spacer"></div>
+        {% include '{}/includes/openweathermap.jinja'.format(settings.theme) %}
+      </div>
+      
+      <!-- Bottom row, not visible on scroll -->
+      <div class="mdl-layout__header-row">
+        <div class="mdl-layout-spacer"></div>
+        <nav id="page-navigation" class="site-nav mdl-navigation">
+          {% include '{}/includes/{}.jinja'.format(settings.theme, settings.navigation.primary.filename) %}
+        </nav>
+      </div>
+    </header>
+
+    <div class="mdl-layout__drawer">
+      <span class="mdl-layout-title">{{ settings.navigation.secondary.title }}</span>
+      <nav class="mdl-navigation">
+        {% include '{}/includes/{}.jinja'.format(settings.theme, settings.navigation.secondary.filename) %}
+      </nav>
+    </div>
+
+    <div id="content" class="mdl-layout__content">
+
+      <!-- MDL Progress Bar with Indeterminate Progress -->
+      <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate" style="display:none;width:100%;"></div>
+
+      {# hero #}
+      {% block hero %}{% endblock %}
+
+      {# breadcrumb #}
+      {% block breadcrumb %}{% endblock %}
+
+      <main id="main-content" class="main-area">
+        <div class="mdl-grid">
+
+        {# secondary #}
+
+        <div id="primary" class="content-area mdl-cell mdl-cell--10-col">
+          <div id="main" class="site-main">
+            <div class="main-inner">
+
+              {% block primary %}
+              <div class="page-header">
+                <h2>Title</h2>
+              </div>
+              <div class="page-content">
+                ...
+              </div>
+              <div class="page-footer"></div>
+              {% endblock %}
+
+            </div>
+          </div>{# main #}
+        </div>{# primary #}
+
+        {# tertiary #}
+        <aside id="tertiary" class="widget-area sidebar tertiary-sidebar mdl-cell mdl-cell--2-col">
+          {% include '{}/includes/{}.jinja'.format(settings.theme, settings.sidebar.secondary.filename) %}
+        </aside>
+
+        </div>{# grid #}
+      </main>{# main-content #}
+
+      <footer id="colophon" class="site-footer">
+        {% block footer %}
+        
+        <span id="copyright">This software is licensed under the MIT license.</span><br>
+        <a href="javascript:void(0);">MIT License</a> | <a href="javascript:void(0);">View on Github</a>
+
+        {% endblock %}
+      </footer>
+    </div>{# content #}
+
+  </div>{# page #}
+
+  {% block scripts %}
+    {% include '{}/includes/scripts.jinja'.format(settings.theme) %}
+    {% block script %}{% endblock %}
+  {% endblock %}
+
+  {% with messages = get_flashed_messages() %}
+    {{ messages }}
+    {% if messages %}
+    <script type="text/javascript">
+      alert("{{messages[-1]}}");
+    </script>
+    {% endif %}
+  {% endwith %}
+</body>
+
+</html>

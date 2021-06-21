@@ -1,0 +1,33 @@
+# 2020-12-29
+- Added a slider to the main page.
+- Added cards to the main page.
+- Updated navigation
+- Updated /analysis/corona19/country/
+- Updated /analysis/corona19/city/
+- Updated /analysis/corona19/age/
+
+# 2020-12-23
+- Updated /analysis/corona19/country/
+- Added /analysis/corona19/city/
+- Added /analysis/corona19/age/
+
+# 2020-12-22
+- Added /analysis/corona19/country/
+
+# 2020-12-18
+- Added stock predictions using chart.js.
+- Change the default frontend framework from Bootstrap to Material Design Light.
+- Updated template file autoloader router module.
+
+# 2020-12-17
+- Added analysis stock prediction middleware.
+- Setting up the development environment in maxos.
+
+# 2020-12-16
+- Blueprint set.
+- Setting up the development environment in maxos.
+
+# 2020-12-15
+- Create an openweathermap module.
+- Create an krx module.
+- Setting up the development environment in maxos.

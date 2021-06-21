@@ -1,0 +1,63 @@
+{% extends '{}/layouts/{}.jinja'.format(settings.theme, settings.layout) %}
+
+
+
+{# Head #}
+{% block title %}주유소 크롤링{% endblock %}
+{% block stylesheet %}
+<style>
+
+</style>
+{% endblock %}
+
+
+
+{# body #}
+{% block secondary %}
+<h2 class="page-title">주유소 크롤링</h2>
+
+<form action="/analysis/crawling/gasstation/" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+  
+  <div>
+    ...
+  </div>
+
+  <br>
+
+  <div class="form-buttons">
+    <button type="reset" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Cancel</button>
+    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="onSubmit()">Submit</button>
+  </div>
+
+  <br>
+
+  {% if data.iserror %}
+  <div class="error-message">
+    {{ data.errmsg }}
+  </div>
+  {% endif %}
+
+</form>
+{% endblock %}
+
+
+
+{% block primary %}
+<div class="page-header"></div>
+
+<div class="page-content">
+  ...
+</div>
+
+<div class="page-footer"></div>
+{% endblock %}
+
+
+
+{# foot #}
+{% block script %}
+<script>
+
+</script>
+{% endblock %}

@@ -1,0 +1,482 @@
+{% extends '{}/layouts/{}.jinja'.format(settings.theme, settings.layout) %}
+
+
+
+{# Head #}
+{% block title %}홈{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{{ url_for('static', filename='{}/vendor/slick/1.8.1/slick.css'.format(settings.theme)) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='{}/vendor/slick/1.8.1/slick-theme.css'.format(settings.theme)) }}">
+<style>
+.main-area > .mdl-grid{ padding: 0; }
+.content-area.mdl-cell{ width:100%; margin: 0; }
+
+.section { padding-top: 50px; }
+.section h2 {margin-bottom: 0;padding: 0 16px;}
+.section .mdl-card {
+    justify-content: space-between;
+}
+</style>
+{% endblock %}
+
+
+
+
+{# body #}
+{% block hero %}
+<div id="hero" class="site-hero vh-75">
+  <div class="hero-inner">
+
+    <div class="slider">
+      <div class="slides slider-slick">
+
+        <div class="slide aligns" style="background-image: url({{ url_for('static', filename='{}/assets/img/lorem-picsum-01-1920x1024.jpg'.format(settings.theme)) }});">
+          <div class="slide-inner align-middle"></div>
+        </div>
+        <div class="slide aligns" style="background-image: url({{ url_for('static', filename='{}/assets/img/lorem-picsum-02-1920x1024.jpg'.format(settings.theme)) }});">
+          <div class="slide-inner align-middle"></div>
+        </div>
+        <div class="slide aligns" style="background-image: url({{ url_for('static', filename='{}/assets/img/lorem-picsum-03-1920x1024.jpg'.format(settings.theme)) }});">
+          <div class="slide-inner align-middle"></div>
+        </div>
+
+      </div>{# slides #}
+    </div>{# slider #}
+
+  </div>{# hero-inner #}
+</div>{# hero #}
+{% endblock %}
+
+
+
+{% block primary %}
+<header class="page-header"></header>
+
+<div class="page-content">
+
+  <div class="section">
+    <h2>Data Analysis</h2>
+    <div class="mdl-grid">
+
+      <div class="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h3 class="mdl-card__title-text">서울특별시 공원 현황</h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          공원정보를 조회할 수 있도록 하는 API입니다.
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/analysis/seoul/park/">
+            Read More
+          </a>
+        </div>
+      </div>
+
+      <div class="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h3 class="mdl-card__title-text">서울특별시 5대 범죄 발생현황</h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          서울시 범죄의 범죄유형별 발생 및 검거건수 등
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/analysis/seoul/crime/">
+            Read More
+          </a>
+        </div>
+      </div>
+
+      <div class="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h3 class="mdl-card__title-text">서울특별시 CCTV 설치현황</h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          서울특별시 각 자치구의 목적별 CCTV 설치 현황입니다.
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/analysis/seoul/cctv/">
+            Read More
+          </a>
+        </div>
+      </div>
+
+      <div class="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h3 class="mdl-card__title-text">코로나19 감염현황</h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          코로나19감염증으로 인한 일별 확진자, 완치자, 치료중인환자, 사망자등에 대한 현황자료
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/analysis/corona19/country/">
+            Read More
+          </a>
+        </div>
+      </div>
+
+      <div class="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h3 class="mdl-card__title-text">코로나19 시·도 발생현황</h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          코로나19감염증으로 인한 시.도별 신규확진자, 신규사망자, 격리중인환자수, 격리해제환자수등에 대한 현황자료
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/analysis/corona19/city/">
+            Read More
+          </a>
+        </div>
+      </div>
+
+      <div class="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h3 class="mdl-card__title-text">코로나19 연령별·성별 감염현황</h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          코로나19감염증으로 인한 일별 확진자, 완치자, 치료중인환자, 사망자등에 대한 현황자료
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/analysis/corona19/age/">
+            Read More
+          </a>
+        </div>
+      </div>
+
+      <div class="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h3 class="mdl-card__title-text">카토그램 인구소멸위기</h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Mauris sagittis pellentesque lacus eleifend lacinia...
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/analysis/cartogram/population/">
+            Read More
+          </a>
+        </div>
+      </div>
+
+      <div class="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h3 class="mdl-card__title-text">카토그램 커피지수</h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Mauris sagittis pellentesque lacus eleifend lacinia...
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/analysis/cartogram/coffee/">
+            Read More
+          </a>
+        </div>
+      </div>
+
+      <div class="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h3 class="mdl-card__title-text">크롤링 샌드위치</h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Mauris sagittis pellentesque lacus eleifend lacinia...
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/analysis/crawling/sandwich/">
+            Read More
+          </a>
+        </div>
+      </div>
+
+      <div class="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h3 class="mdl-card__title-text">크롤링 주유소</h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Mauris sagittis pellentesque lacus eleifend lacinia...
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/analysis/crawling/gasstation/">
+            Read More
+          </a>
+        </div>
+      </div>
+
+      <div class="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h3 class="mdl-card__title-text">주가예측</h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Mauris sagittis pellentesque lacus eleifend lacinia...
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/analysis/stock/prediction/">
+            Read More
+          </a>
+        </div>
+      </div>
+
+      <div class="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h3 class="mdl-card__title-text">워드클라우드 경제뉴스</h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Mauris sagittis pellentesque lacus eleifend lacinia...
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/analysis/wordcloud/economic/">
+            Read More
+          </a>
+        </div>
+      </div>
+
+      <div class="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h3 class="mdl-card__title-text">워드클라우드 스포츠뉴스</h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Mauris sagittis pellentesque lacus eleifend lacinia...
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/analysis/wordcloud/sports/">
+            Read More
+          </a>
+        </div>
+      </div>
+
+
+    </div>{# mdl-grid #}
+  </div>{# section #}
+
+
+  <div class="section">
+    <h2>Artificial Intelligence</h2>
+    <div class="mdl-grid">
+
+      <div class="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h3 class="mdl-card__title-text">Titanic Binary Classification</h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Mauris sagittis pellentesque lacus eleifend lacinia...
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/ai/binary-classification/titanic/">
+            Read More
+          </a>
+        </div>
+      </div>
+
+      <div class="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h3 class="mdl-card__title-text">Pima Indian Binary Classification</h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Mauris sagittis pellentesque lacus eleifend lacinia...
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/ai/binary-classification/pima-indian/">
+            Read More
+          </a>
+        </div>
+      </div>
+
+      <div class="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h3 class="mdl-card__title-text">Breast Cancer Binary Classification</h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Mauris sagittis pellentesque lacus eleifend lacinia...
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/ai/binary-classification/breast-cancer/">
+            Read More
+          </a>
+        </div>
+      </div>
+
+      <div class="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h3 class="mdl-card__title-text">Iris Multiple Classification</h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Mauris sagittis pellentesque lacus eleifend lacinia...
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/ai/multiple-classification/iris/">
+            Read More
+          </a>
+        </div>
+      </div>
+
+      <div class="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h3 class="mdl-card__title-text">Wine Multiple Classification</h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Mauris sagittis pellentesque lacus eleifend lacinia...
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/ai/multiple-classification/wine/">
+            Read More
+          </a>
+        </div>
+      </div>
+
+      <div class="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h3 class="mdl-card__title-text">Naver Emotional Classification</h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Mauris sagittis pellentesque lacus eleifend lacinia...
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/ai/advanced-classification/naver/">
+            Read More
+          </a>
+        </div>
+      </div>
+
+      <div class="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h3 class="mdl-card__title-text">IMDB Emotional Classification</h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Mauris sagittis pellentesque lacus eleifend lacinia...
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/ai/advanced-classification/imdb/">
+            Read More
+          </a>
+        </div>
+      </div>
+
+      <div class="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h3 class="mdl-card__title-text">MNIST Handwriting</h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Mauris sagittis pellentesque lacus eleifend lacinia...
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/ai/advanced-classification/mnist-handwriting/">
+            Read More
+          </a>
+        </div>
+      </div>
+
+      <div class="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h3 class="mdl-card__title-text">Diabetes BMI Regression</h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Mauris sagittis pellentesque lacus eleifend lacinia...
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/ai/regression/diabetes-bmi/">
+            Read More
+          </a>
+        </div>
+      </div>
+
+      <div class="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h3 class="mdl-card__title-text">Iris Regression</h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Mauris sagittis pellentesque lacus eleifend lacinia...
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/ai/regression/iris/">
+            Read More
+          </a>
+        </div>
+      </div>
+
+      <div class="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h3 class="mdl-card__title-text">Stock Price Regression</h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Mauris sagittis pellentesque lacus eleifend lacinia...
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/ai/regression/stock-price/">
+            Read More
+          </a>
+        </div>
+      </div>
+
+      <div class="mdl-card mdl-cell mdl-cell--3-col mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h3 class="mdl-card__title-text">PCA Clustering</h3>
+        </div>
+        <div class="mdl-card__supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Mauris sagittis pellentesque lacus eleifend lacinia...
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/ai/clustering/pca/">
+            Read More
+          </a>
+        </div>
+      </div>
+
+
+
+
+    </div>{# mdl-grid #}
+  </div>{# section #}
+
+</div>{# page-content #}
+
+<footer class="page-footer"></footer>
+{% endblock %}
+
+
+
+{# foot #}
+{% block script %}
+<script src="{{ url_for('static', filename='{}/vendor/slick/1.8.1/slick.min.js'.format(settings.theme)) }}"></script>
+<script>
+$('.slider-slick').on('init', function(event, slick){
+  /**
+  * slick kills background-attachment
+  * @link https://github.com/kenwheeler/slick/issues/941
+  */
+  $(this).find(".slick-list").css("transform", "none");
+  $(this).find(".slick-track").css("transform", "none");
+  // hide slider initialize image
+  if ( !! $(this).prev('.slider-initialize').length ) {
+    $(this).prev('.slider-initialize').hide();
+  }
+})
+.slick({
+  arrows: true,
+  dots: false,
+  infinite: true,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  prevArrow : '<button type="button" class="slider-arrow slider-prev">이전</button>',
+  nextArrow : '<button type="button" class="slider-arrow slider-next">다음</button>',
+  fade: true,
+  autoplay: false,
+  autoplaySpeed: 3000,
+  pauseOnHover: false,
+});
+</script>
+{% endblock %}

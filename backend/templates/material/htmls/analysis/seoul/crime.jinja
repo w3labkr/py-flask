@@ -1,0 +1,71 @@
+{% extends '{}/layouts/{}.jinja'.format(settings.theme, settings.layout) %}
+
+
+
+{# Head #}
+{% block title %}서울시 5대 범죄 발생현황 통계{% endblock %}
+{% block stylesheet %}
+<style>
+
+</style>
+{% endblock %}
+
+
+
+{# body #}
+{% block secondary %}
+<h2 class="page-title">5대 범죄 현황</h2>
+<p class="page-description">서울시 범죄의 범죄유형별 발생 및 검거건수 등</p>
+
+<form action="/analysis/seoul/crime/" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+  
+  <div>
+    ...
+  </div>
+
+  <br>
+
+  <div class="form-buttons">
+    <button type="reset" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Cancel</button>
+    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="onSubmit()">Submit</button>
+  </div>
+
+  <br>
+
+  {% if data.iserror %}
+  <div class="error-message">
+    {{ data.errmsg }}
+  </div>
+  {% endif %}
+
+</form>
+{% endblock %}
+
+
+
+{% block primary %}
+<div class="page-header"></div>
+
+<div class="page-content">
+  
+  <div class="section">
+    <h3>서울시 5대 범죄 발생현황 통계</h3>
+    <table id="datatable-age" class="display" width="100%">
+      <caption>자료출처: 서울열린데이터광장</caption>
+    </table>
+  </div>
+
+</div>
+
+<div class="page-footer"></div>
+{% endblock %}
+
+
+
+{# foot #}
+{% block script %}
+<script>
+
+</script>
+{% endblock %}

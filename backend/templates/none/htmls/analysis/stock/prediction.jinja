@@ -1,0 +1,217 @@
+{% extends '{}/layouts/{}.jinja'.format(settings.theme, settings.layout) %}
+
+
+
+{# Head #}
+{% block title %}주가예측{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{{ url_for('static', filename='{}/vendor/chart.js/2.9.4/Chart.min.css'.format(settings.theme)) }}">
+<style>
+	canvas{
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+  .select2-container{
+    max-width:200px;
+  }
+</style>
+{% endblock %}
+
+
+
+{# body #}
+{% block secondary %}
+<h2 class="page-title">주가예측</h2>
+
+<form action="/analysis/stock/prediction/" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+  
+  <div id="stockmarkets" style="margin-bottom:5px;">
+    {% set isChecked = 'checked' if settings.request.form.stockmarket == 'kospi' else '' %}
+    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect">
+      <input type="radio" class="stockmarket mdl-radio__button" name="stockmarket" value="kospi" oninput="onStockmarket(this)" {{ isChecked }}>
+      <span class="mdl-radio__label">코스피</span>
+    </label>
+
+    {% set isChecked = 'checked' if settings.request.form.stockmarket == 'kosdaq' else '' %}
+    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect">
+      <input type="radio" class="stockmarket mdl-radio__button" name="stockmarket" value="kosdaq" oninput="onStockmarket(this)" {{ isChecked }}>
+      <span class="mdl-radio__label">코스닥</span>
+    </label>
+  </div>
+
+  <div id="stockcodes">
+
+    {% set isDisplay = 'display:block' if settings.request.form.stockmarket == 'kospi' else 'display:none' %}
+    <div id="kospi" class="stockcode-wrapper" style="{{ isDisplay }}">
+      <select name="kospicode" class="stockcode">
+      {% for code, name in data.kospi.codes.items() %}
+        {% set isSelected = 'selected' if settings.request.form.kospicode == code else '' %}
+        <option value="{{ code }}" {{ isSelected }}>{{ name }}</option>
+      {% endfor %}
+      </select>
+    </div>
+
+    {% set isDisplay = 'display:block' if settings.request.form.stockmarket == 'kosdaq' else 'display:none' %}
+    <div id="kosdaq" class="stockcode-wrapper" style="{{ isDisplay }}">
+      <select name="kosdaqcode" class="stockcode">
+      {% for code, name in data.kosdaq.codes.items() %}
+        {% set isSelected = 'selected' if settings.request.form.kosdaqcode == code else '' %}
+        <option value="{{ code }}" {{ isSelected }}>{{ name }}</option>
+      {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="learningdays">
+    <span class="mdl-radio__label">학습기간</span><br>
+
+    {% set isChecked = 'checked' if settings.request.form.learningday == '1' else '' %}
+    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect">
+      <input type="radio" class="learningday mdl-radio__button" name="learningday" value="1" {{ isChecked }}>
+      <span class="mdl-radio__label">1년</span>
+    </label>
+
+    {% set isChecked = 'checked' if settings.request.form.learningday == '3' else '' %}
+    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect">
+      <input type="radio" class="learningday mdl-radio__button" name="learningday" value="3" {{ isChecked }}>
+      <span class="mdl-radio__label">3년</span>
+    </label>
+
+    {% set isChecked = 'checked' if settings.request.form.learningday == '5' else '' %}
+    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect">
+      <input type="radio" class="learningday mdl-radio__button" name="learningday" value="5" {{ isChecked }}>
+      <span class="mdl-radio__label">5년</span>
+    </label>
+  </div>
+
+  <br>
+
+  <div class="forecastdays">
+    <span class="mdl-radio__label">예측기간</span><br>
+
+    {% set isChecked = 'checked' if settings.request.form.forecastday == '5' else '' %}
+    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect">
+      <input type="radio" class="forecastday mdl-radio__button" name="forecastday" value="5" {{ isChecked }}>
+      <span class="mdl-radio__label">5일</span>
+    </label>
+
+    {% set isChecked = 'checked' if settings.request.form.forecastday == '15' else '' %}
+    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect">
+      <input type="radio" class="forecastday mdl-radio__button" name="forecastday" value="15" {{ isChecked }}>
+      <span class="mdl-radio__label">15일</span>
+    </label>
+
+    {% set isChecked = 'checked' if settings.request.form.forecastday == '30' else '' %}
+    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect">
+      <input type="radio" class="forecastday mdl-radio__button" name="forecastday" value="30" {{ isChecked }}>
+      <span class="mdl-radio__label">15일</span>
+    </label>
+  </div>
+
+  <br>
+
+  <div class="form-buttons">
+    <button type="reset" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Cancel</button>
+    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="onSubmit()">Submit</button>
+  </div>
+
+  <br>
+
+  {% if settings.dataset.iserror %}
+  <div class="error-message">
+    {{ settings.dataset.errmsg }}
+  </div>
+  {% endif %}
+
+</form>
+{% endblock %}
+
+
+
+{% block primary %}
+<div class="page-header"></div>
+
+<div class="page-content">
+  <canvas id="myChart" style="width:100%;height:680px;"></canvas>
+</div>
+
+<div class="page-footer"></div>
+{% endblock %}
+
+
+
+{# foot #}
+{% block script %}
+<script src="{{ url_for('static', filename='{}/vendor/chart.js/2.9.4/Chart.bundle.min.js'.format(settings.theme)) }}"></script>
+<script src="{{ url_for('static', filename='{}/vendor/chart.js/2.9.4/Chart.min.js'.format(settings.theme)) }}"></script>
+
+<script>
+function onStockmarket(self) {
+  elements = document.getElementsByClassName('stockcode-wrapper');
+  for (i = 0; i <elements.length; i++) {
+    elements[i].style.display = 'none';
+  }
+  document.getElementById(self.value).style.display = 'block';
+}
+</script>
+
+<script>
+;(function ($, window, document, undefined) {
+var config = {
+  type: 'line',
+  data: {
+    labels: JSON.parse('{{ settings.dataset.ds | tojson }}'),
+    datasets: [
+      {
+        label: 'Price',
+        fill: false,
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: JSON.parse('{{ settings.dataset.Close | tojson }}'),
+      },
+      {
+        label: 'Trend',
+        fill: false,
+        backgroundColor: 'rgb(54, 162, 235)',
+        borderColor: 'rgb(54, 162, 235)',
+        data: JSON.parse('{{ settings.dataset.trend | tojson }}'),
+      }
+    ],
+  },
+  options: {
+    responsive: true,
+    title: {
+      display: true,
+      text: 'Stock Trend Analysis'
+    },
+    elements: {
+      point:{
+        radius: 0
+      }
+    },
+    scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
+    },
+  },
+}
+window.onload = function() {
+  var ctx = document.getElementById('myChart').getContext('2d');
+  window.myLine = new Chart(ctx, config);
+};
+})(jQuery, window, document);
+</script>
+
+<script>
+;(function ($, window, document, undefined) {
+  $('.stockcode').select2({width: '100%'});
+})(jQuery, window, document);
+</script>
+{% endblock %}

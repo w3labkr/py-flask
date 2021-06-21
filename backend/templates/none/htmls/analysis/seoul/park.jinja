@@ -1,0 +1,71 @@
+{% extends '{}/layouts/{}.jinja'.format(settings.theme, settings.layout) %}
+
+
+
+{# Head #}
+{% block title %}서울시 주요 공원현황{% endblock %}
+{% block stylesheet %}
+<style>
+
+</style>
+{% endblock %}
+
+
+
+{# body #}
+{% block secondary %}
+<h2 class="page-title">공원 현황</h2>
+<p class="page-description">공원정보를 조회할 수 있도록 하는 API입니다.</p>
+
+<form action="/analysis/seoul/park/" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+  
+  <div>
+    ...
+  </div>
+
+  <br>
+
+  <div class="form-buttons">
+    <button type="reset" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Cancel</button>
+    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="onSubmit()">Submit</button>
+  </div>
+
+  <br>
+
+  {% if data.iserror %}
+  <div class="error-message">
+    {{ data.errmsg }}
+  </div>
+  {% endif %}
+
+</form>
+{% endblock %}
+
+
+
+{% block primary %}
+<div class="page-header"></div>
+
+<div class="page-content">
+  
+  <div class="section">
+    <h3>서울시 주요 공원현황</h3>
+    <table id="datatable-age" class="display" width="100%">
+      <caption>자료출처: 서울열린데이터광장</caption>
+    </table>
+  </div>
+
+</div>
+
+<div class="page-footer"></div>
+{% endblock %}
+
+
+
+{# foot #}
+{% block script %}
+<script>
+
+</script>
+{% endblock %}

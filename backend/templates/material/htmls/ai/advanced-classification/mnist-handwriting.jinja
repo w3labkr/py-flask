@@ -1,0 +1,69 @@
+{% extends '{}/layouts/{}.jinja'.format(settings.theme, settings.layout) %}
+
+
+
+{# Head #}
+{% block title %}MNIST Handwriting - Classification | AI{% endblock %}
+
+
+
+{# body #}
+{% block secondary %}
+<h2 class="page-title">MNIST</h2>
+
+<form action="/ai/advanced-classification/mnist-handwriting/" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+  
+  <div>
+    ...
+  </div>
+
+  <br>
+
+  <div class="form-buttons">
+    <button type="reset" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Cancel</button>
+    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="onSubmit()">Submit</button>
+  </div>
+
+  <br>
+
+  {% if data.iserror %}
+  <div class="error-message">
+    {{ data.errmsg }}
+  </div>
+  {% endif %}
+
+</form>
+{% endblock %}
+
+
+
+{% block primary %}
+<header class="page-header">
+  <h2 class="page-title">MNIST Handwriting - Classification</h2>
+</header>
+
+<div class="page-content">
+  
+  <div class="section">
+    <h3>Trained</h3>
+  </div>
+
+  <div class="section">
+    <h3>Dataset</h3>
+    <table id="datatable" class="display" width="100%">
+      <caption>source: sklearn</caption>
+    </table>
+  </div>
+
+</div>
+
+<footer class="page-footer"></footer>
+{% endblock %}
+
+
+
+{# foot #}
+{% block script %}
+
+{% endblock %}

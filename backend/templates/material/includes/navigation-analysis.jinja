@@ -1,0 +1,78 @@
+<hr>
+
+{% set isActive = 'active parent' if (settings.metadata.ancestor == 'analysis') and (settings.metadata.parent == 'seoul') else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="javascript:void(0);"><b>서울특별시</b></a>
+
+{% set slug = '/analysis/seoul/park/' %}
+{% set isActive = 'active' if slug == settings.metadata.slug else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">&nbsp;&nbsp;&nbsp;&nbsp;공원 현황</a>
+
+{% set slug = '/analysis/seoul/crime/' %}
+{% set isActive = 'active' if slug == settings.metadata.slug else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">&nbsp;&nbsp;&nbsp;&nbsp;5대 범죄 발생현황</a>
+
+{% set slug = '/analysis/seoul/cctv/' %}
+{% set isActive = 'active' if slug == settings.metadata.slug else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">&nbsp;&nbsp;&nbsp;&nbsp;CCTV 설치현황</a>
+
+<hr>
+
+{% set isActive = 'active parent' if (settings.metadata.ancestor == 'analysis') and (settings.metadata.parent == 'corona19') else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="javascript:void(0);"><b>코로나19</b></a>
+
+{% set slug = '/analysis/corona19/country/' %}
+{% set isActive = 'active' if slug == settings.metadata.slug else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">&nbsp;&nbsp;&nbsp;&nbsp;감염현황</a>
+
+{% set slug = '/analysis/corona19/city/' %}
+{% set isActive = 'active' if slug == settings.metadata.slug else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">&nbsp;&nbsp;&nbsp;&nbsp;시·도 발생현황</a>
+
+{% set slug = '/analysis/corona19/age/' %}
+{% set isActive = 'active' if slug == settings.metadata.slug else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">&nbsp;&nbsp;&nbsp;&nbsp;연령별·성별 감염현황</a>
+
+<hr>
+
+{% set isActive = 'active parent' if (settings.metadata.ancestor == 'analysis') and (settings.metadata.parent == 'cartogram') else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="javascript:void(0);"><b>카토그램</b></a>
+
+{% set slug = '/analysis/cartogram/population/' %}
+{% set isActive = 'active' if slug == settings.metadata.slug else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">&nbsp;&nbsp;&nbsp;&nbsp;인구소멸위기</a>
+
+{% set slug = '/analysis/cartogram/coffee/' %}
+{% set isActive = 'active' if slug == settings.metadata.slug else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">&nbsp;&nbsp;&nbsp;&nbsp;커피지수</a>
+
+<hr>
+
+{% set isActive = 'active parent' if (settings.metadata.ancestor == 'analysis') and (settings.metadata.parent == 'crawling') else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="javascript:void(0);"><b>크롤링</b></a>
+
+{% set slug = '/analysis/crawling/sandwich/' %}
+{% set isActive = 'active' if slug == settings.metadata.slug else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">&nbsp;&nbsp;&nbsp;&nbsp;시카고샌드위치</a>
+
+{% set slug = '/analysis/crawling/gasstation/' %}
+{% set isActive = 'active' if slug == settings.metadata.slug else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">&nbsp;&nbsp;&nbsp;&nbsp;주유소</a>
+
+<hr>
+
+{% set slug = '/analysis/stock/prediction/' %}
+{% set isActive = 'active' if slug == settings.metadata.slug else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">주가예측</a>
+
+<hr>
+
+{% set isActive = 'active parent' if (settings.metadata.ancestor == 'analysis') and (settings.metadata.parent == 'wordcloud') else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="javascript:void(0);"><b>워드클라우드</b></a>
+
+{% set slug = '/analysis/wordcloud/economic/' %}
+{% set isActive = 'active' if slug == settings.metadata.slug else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">&nbsp;&nbsp;&nbsp;&nbsp;경제뉴스</a>
+
+{% set slug = '/analysis/wordcloud/sports/' %}
+{% set isActive = 'active' if slug == settings.metadata.slug else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">&nbsp;&nbsp;&nbsp;&nbsp;스포츠뉴스</a>

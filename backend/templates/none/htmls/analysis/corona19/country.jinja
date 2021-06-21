@@ -1,0 +1,133 @@
+{% extends '{}/layouts/{}.jinja'.format(settings.theme, settings.layout) %}
+
+
+
+{# Head #}
+{% block title %}코로나19 감염현황{% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{{ url_for('static', filename='{}/vendor/datatables/1.10.22/jquery.dataTables.min.css'.format(settings.theme)) }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='{}/vendor/flatpickr/4.6.8/flatpickr.min.css'.format(settings.theme)) }}">
+<style>
+
+</style>
+{% endblock %}
+
+
+
+{# body #}
+{% block secondary %}
+<h2 class="page-title">감염현황</h2>
+<p class="page-description">코로나19감염증으로 인한 일별 확진자, 완치자, 치료중인환자, 사망자등에 대한 현황자료</p>
+
+<form action="/analysis/corona19/country/" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+  
+  <div class="field-groups">
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <input class="mdl-textfield__input flatpickr" type="text" id="startCreateDt" name="startCreateDt" value="{{ settings.request.form.startCreateDt }}">
+      <label class="mdl-textfield__label" for="startCreateDt">startCreateDt</label>
+    </div>    
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <input class="mdl-textfield__input flatpickr" type="text" id="endCreateDt" name="endCreateDt" value="{{ settings.request.form.endCreateDt }}">
+      <label class="mdl-textfield__label" for="endCreateDt">endCreateDt</label>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="form-buttons">
+    <button type="reset" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Cancel</button>
+    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="onSubmit()">Submit</button>
+  </div>
+
+  <br>
+
+  {% if data.iserror %}
+  <div class="error-message">
+    {{ data.errmsg }}
+  </div>
+  {% endif %}
+
+</form>
+{% endblock %}
+
+
+
+{% block primary %}
+<div class="page-header"></div>
+
+<div class="page-content">
+
+  <div class="section">
+    <h3>코로나19 감염현황</h3>
+    <table id="datatable" class="mdl-data-table">
+      <caption>자료출처: 공공데이터포털</caption>
+    </table>
+  </div>
+
+</div>
+
+<div class="page-footer"></div>
+{% endblock %}
+
+
+
+{# foot #}
+{% block script %}
+<script src="{{ url_for('static', filename='{}/vendor/datatables/1.10.22/jquery.dataTables.min.js'.format(settings.theme)) }}"></script>
+<script src="{{ url_for('static', filename='{}/vendor/flatpickr/4.6.8/flatpickr.min.js'.format(settings.theme)) }}"></script>
+<script src="{{ url_for('static', filename='{}/vendor/flatpickr/4.6.8/l10n/ko.js'.format(settings.theme)) }}"></script>
+<script>
+function onSubmit() {
+  document.getElementById('p2').style.display = 'block';
+}
+</script>
+<script>
+;(function ($, window, document, undefined) {
+
+  $('#datatable').DataTable({
+    data: JSON.parse('{{ data.rows | tojson }}'),
+    columns: JSON.parse('{{ data.cols | tojson }}'),
+    columnDefs: [
+      { 
+        targets: [1, 2, 4, 5, 6, 7, 8, 9], 
+        render: function(data, type, row) { 
+          return settings.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); 
+        }
+      }
+    ],
+    language: {
+      thousands: ',',
+      search: '',
+      searchPlaceholder: "검색어를 입력해 주세요.",
+      paginate: {
+        first: '처음',
+        previous: '이전',
+        next: '다음',
+        last: '마지막',
+      }
+    },
+    oLanguage: {
+      sLengthMenu: "_MENU_",
+    },
+    info: false,
+    order: [[ 1, 'desc' ]],
+    aLengthMenu: [[10, 20, 50, 100], ['10개씩 보기', '20개씩 보기', '50개씩 보기', '100개씩 보기']],
+    pageLength: 10
+  });
+
+  // flatpickr
+  var dateSelector = document.querySelectorAll('.flatpickr');
+  dateSelector.flatpickr();
+
+  flatpickr.localize(flatpickr.l10ns.ko);
+  flatpickr(dateSelector)
+
+  dateSelector.flatpickr({
+    local: 'ko',
+    dateFormat: "Y-m-d",
+  });
+
+})(jQuery, window, document);
+</script>
+{% endblock %}

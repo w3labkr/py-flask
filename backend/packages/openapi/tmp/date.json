@@ -1,0 +1,9 @@
+{
+  "num_of_rows": 10,
+  "total_count": 1,
+  "total_page": 1,
+  "startDate": datetime.datetime(2020, 12, 10, 0, 0),
+  "endDate": datetime.datetime(2020, 12, 10, 0, 0),
+  "periods": 0,
+  "drange": DatetimeIndex([], (dtype = "datetime64[ns]"), (freq = "M"))
+}

@@ -1,0 +1,72 @@
+<hr>
+
+{% set isActive = 'active parent' if (settings.metadata.ancestor == 'ai') and (settings.metadata.parent == 'binary-classification') else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="javascript:void(0);"><b>Binary Classification</b></a>
+
+{% set slug = '/ai/binary-classification/titanic/' %}
+{% set isActive = 'active' if slug == settings.metadata.slug else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">&nbsp;&nbsp;&nbsp;&nbsp;Titanic</a>
+
+{% set slug = '/ai/binary-classification/pima-indian/' %}
+{% set isActive = 'active' if slug == settings.metadata.slug else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">&nbsp;&nbsp;&nbsp;&nbsp;Pima Indian</a>
+
+{% set slug = '/ai/binary-classification/breast-cancer/' %}
+{% set isActive = 'active' if slug == settings.metadata.slug else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">&nbsp;&nbsp;&nbsp;&nbsp;Breast Cancer</a>
+
+
+
+{% set isActive = 'active parent' if (settings.metadata.ancestor == 'ai') and (settings.metadata.parent == 'multiple-classification') else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="javascript:void(0);"><b>Multiple Classification</b></a>
+
+{% set slug = '/ai/multiple-classification/iris/' %}
+{% set isActive = 'active' if slug == settings.metadata.slug else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">&nbsp;&nbsp;&nbsp;&nbsp;Iris</a>
+
+{% set slug = '/ai/multiple-classification/wine/' %}
+{% set isActive = 'active' if slug == settings.metadata.slug else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">&nbsp;&nbsp;&nbsp;&nbsp;Wine</a>
+
+{% set isActive = 'active parent' if (settings.metadata.ancestor == 'ai') and (settings.metadata.parent == 'advanced-classification') else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="javascript:void(0);"><b>Advanced Classification</b></a>
+
+
+
+{% set slug = '/ai/advanced-classification/naver-emotional/' %}
+{% set isActive = 'active' if slug == settings.metadata.slug else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">&nbsp;&nbsp;&nbsp;&nbsp;Naver Emotional</a>
+
+{% set slug = '/ai/advanced-classification/imdb-emotional/' %}
+{% set isActive = 'active' if slug == settings.metadata.slug else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">&nbsp;&nbsp;&nbsp;&nbsp;IMDB Emotional</a>
+
+{% set slug = '/ai/advanced-classification/mnist-handwriting/' %}
+{% set isActive = 'active' if slug == settings.metadata.slug else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">&nbsp;&nbsp;&nbsp;&nbsp;MNIST Handwriting</a>
+
+<hr>
+
+{% set isActive = 'active parent' if (settings.metadata.ancestor == 'ai') and (settings.metadata.parent == 'regression') else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="javascript:void(0);"><b>Regression</b></a>
+
+{% set slug = '/ai/regression/diabetes-bmi/' %}
+{% set isActive = 'active' if slug == settings.metadata.slug else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">&nbsp;&nbsp;&nbsp;&nbsp;Diabetes BMI</a>
+
+{% set slug = '/ai/regression/iris/' %}
+{% set isActive = 'active' if slug == settings.metadata.slug else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">&nbsp;&nbsp;&nbsp;&nbsp;Iris</a>
+
+{% set slug = '/ai/regression/stock-price/' %}
+{% set isActive = 'active' if slug == settings.metadata.slug else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">&nbsp;&nbsp;&nbsp;&nbsp;Stock Price</a>
+
+<hr>
+
+{% set isActive = 'active parent' if (settings.metadata.ancestor == 'ai') and (settings.metadata.parent == 'clustering') else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="javascript:void(0);"><b>Clustering</b></a>
+
+{% set slug = '/ai/clustering/pca/' %}
+{% set isActive = 'active' if slug == settings.metadata.slug else '' %}
+<a class="mdl-navigation__link {{ isActive }}" href="{{ slug }}">&nbsp;&nbsp;&nbsp;&nbsp;PCA</a>
